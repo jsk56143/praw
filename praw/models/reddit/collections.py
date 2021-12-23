@@ -168,8 +168,11 @@ class CollectionModeration(PRAWBase):
     def update_display_layout(self, display_layout: str):
         """Update the collection's display layout.
 
-        :param display_layout: Either `"TIMELINE"` (Best for event or discussion
-            collections) or `"GALLERY"` (Best for image heavy or meme collections).
+        :param display_layout: Either ``"TIMELINE"`` for events or discussions or
+            ``"GALLERY"`` for images or memes. Passing ``""`` or ``None`` will clear the
+            set layout and ``collection.display_layout`` will be ``None``, however, the 
+            collection will appear on Reddit as if ``display_layout`` is set to
+            ``"TIMELINE"``.
 
         Example usage:
 
