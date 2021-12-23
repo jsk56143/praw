@@ -4,7 +4,7 @@ from unittest import mock
 
 import pytest
 
-from praw.exceptions import ClientException
+from praw.exceptions import ClientException, RedditAPIException
 from praw.models import Submission
 
 from ... import IntegrationTest
@@ -139,29 +139,66 @@ class TestCollectionModeration(IntegrationTest):
             assert new_description == collection.description
 
     @mock.patch("time.sleep", return_value=None)
-    def test_update_display_layout(self, _):
+    def test_update_display_layout__gallery(self, _):
         self.reddit.read_only = False
-        uuid = self.NONEMPTY_REAL_UUID
+        uuid = "accd53cf-6f76-49fd-8ca5-5ad2036b4693"
         gallery_layout = "GALLERY"
-        lowercase_gallery_layout = "gallery"
-        timeline_layout = "TIMELINE"
-        empty_string = ""
-        something_random = "colossal atom cake"
         with self.use_cassette():
             collection = self.subreddit.collections(uuid)
             collection.mod.update_display_layout(gallery_layout)
             assert gallery_layout == collection.display_layout
+    
+    @mock.patch("time.sleep", return_value=None)
+    def test_update_display_layout__timeline(self, _):
+        self.reddit.read_only = False
+        uuid = "accd53cf-6f76-49fd-8ca5-5ad2036b4693"
+        timeline_layout = "TIMELINE"
+        with self.use_cassette():
+            collection = self.subreddit.collections(uuid)
             collection.mod.update_display_layout(timeline_layout)
             assert timeline_layout == collection.display_layout
-            collection.mod.update_display_layout(lowercase_gallery_layout)
-            assert lowercase_gallery_layout != collection.display_layout
-            assert timeline_layout == collection.display_layout
+
+    @mock.patch("time.sleep", return_value=None)
+    def test_update_display_layout__empty_string(self, _):
+        self.reddit.read_only = False
+        uuid = "accd53cf-6f76-49fd-8ca5-5ad2036b4693"
+        empty_string = ""
+        with self.use_cassette():
+            collection = self.subreddit.collections(uuid)
             collection.mod.update_display_layout(empty_string)
             assert empty_string != collection.display_layout
-            assert timeline_layout == collection.display_layout
-            collection.mod.update_display_layout(something_random)
-            assert something_random != collection.display_layout
-            assert timeline_layout == collection.display_layout
+            assert None == collection.display_layout
+
+    @mock.patch("time.sleep", return_value=None)
+    def test_update_display_layout__invalid_layout(self, _):
+        self.reddit.read_only = False
+        uuid = "accd53cf-6f76-49fd-8ca5-5ad2036b4693"
+        invalid_layout = "colossal atom cake"
+        with self.use_cassette():
+            collection = self.subreddit.collections(uuid)
+            with pytest.raises(RedditAPIException) as excinfo:
+                collection.mod.update_display_layout(invalid_layout)
+            assert None == collection.display_layout
+
+    @mock.patch("time.sleep", return_value=None)
+    def test_update_display_layout__lowercase(self, _):
+        self.reddit.read_only = False
+        uuid = "accd53cf-6f76-49fd-8ca5-5ad2036b4693"
+        lowercase_gallery_layout = "gallery"
+        with self.use_cassette():
+            collection = self.subreddit.collections(uuid)
+            with pytest.raises(RedditAPIException) as excinfo:
+                collection.mod.update_display_layout(lowercase_gallery_layout)
+            assert None == collection.display_layout
+
+    @mock.patch("time.sleep", return_value=None)
+    def test_update_display_layout__none(self, _):
+        self.reddit.read_only = False
+        uuid = "accd53cf-6f76-49fd-8ca5-5ad2036b4693"
+        with self.use_cassette():
+            collection = self.subreddit.collections(uuid)
+            collection.mod.update_display_layout(None)
+            assert None == collection.display_layout
 
     @mock.patch("time.sleep", return_value=None)
     def test_update_title(self, _):
