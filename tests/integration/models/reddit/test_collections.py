@@ -178,7 +178,7 @@ class TestCollectionModeration(IntegrationTest):
             collection = self.subreddit.collections(uuid)
             with pytest.raises(RedditAPIException) as excinfo:
                 collection.mod.update_display_layout(invalid_layout)
-            assert None == collection.display_layout
+            assert collection.display_layout is None
 
     @mock.patch("time.sleep", return_value=None)
     def test_update_display_layout__lowercase(self, _):
