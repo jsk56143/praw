@@ -179,7 +179,7 @@ class CollectionModeration(PRAWBase):
 
         """
         self._reddit.post(
-            API_PATH["collection_display_layout"],
+            API_PATH["collection_dis_layout"],
             data={
                 "collection_id": self.collection_id,
                 "display_layout": display_layout,
