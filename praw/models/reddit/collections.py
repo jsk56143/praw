@@ -242,6 +242,7 @@ class Collection(RedditBase):
     ``collection_id``   The UUID of the collection.
     ``created_at_utc``  Time the collection was created, represented in `Unix Time`_.
     ``description``     The collection description.
+    ``display_layout``  The collection's display layout.
     ``last_update_utc`` Time the collection was last updated, represented in `Unix
                         Time`_.
     ``link_ids``        A ``list`` of :class:`.Submission` fullnames.
