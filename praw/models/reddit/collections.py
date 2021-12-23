@@ -170,7 +170,7 @@ class CollectionModeration(PRAWBase):
 
         :param display_layout: Either ``"TIMELINE"`` for events or discussions or
             ``"GALLERY"`` for images or memes. Passing ``""`` or ``None`` will clear the
-            set layout and ``collection.display_layout`` will be ``None``, however, the 
+            set layout and ``collection.display_layout`` will be ``None``, however, the
             collection will appear on Reddit as if ``display_layout`` is set to
             ``"TIMELINE"``.
 
@@ -184,7 +184,10 @@ class CollectionModeration(PRAWBase):
         """
         self._reddit.post(
             API_PATH["collection_layout"],
-            data={"collection_id": self.collection_id, "display_layout": display_layout},
+            data={
+                "collection_id": self.collection_id,
+                "display_layout": display_layout,
+            },
         )
 
     def update_title(self, title: str):
