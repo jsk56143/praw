@@ -187,7 +187,7 @@ class TestCollectionModeration(IntegrationTest):
         lowercase_gallery_layout = "gallery"
         with self.use_cassette():
             collection = self.subreddit.collections(uuid)
-            with pytest.raises(RedditAPIException) as excinfo:
+            with pytest.raises(RedditAPIException):
                 collection.mod.update_display_layout(lowercase_gallery_layout)
             assert None == collection.display_layout
 
