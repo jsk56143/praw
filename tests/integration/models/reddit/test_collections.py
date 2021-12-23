@@ -145,6 +145,7 @@ class TestCollectionModeration(IntegrationTest):
         gallery_layout = "GALLERY"
         lowercase_gallery_layout = "gallery"
         timeline_layout = "TIMELINE"
+        empty_string = ""
         something_random = "colossal atom cake"
         with self.use_cassette():
             collection = self.subreddit.collections(uuid)
@@ -154,6 +155,9 @@ class TestCollectionModeration(IntegrationTest):
             assert timeline_layout == collection.display_layout
             collection.mod.update_display_layout(lowercase_gallery_layout)
             assert lowercase_gallery_layout != collection.display_layout
+            assert timeline_layout == collection.display_layout
+            collection.mod.update_display_layout(empty_string)
+            assert empty_string != collection.display_layout
             assert timeline_layout == collection.display_layout
             collection.mod.update_display_layout(something_random)
             assert something_random != collection.display_layout
