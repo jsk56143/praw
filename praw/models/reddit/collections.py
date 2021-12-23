@@ -168,8 +168,8 @@ class CollectionModeration(PRAWBase):
     def update_display_layout(self, display_layout: str):
         """Update the collection's display layout.
 
-        :param display_layout: Either `"TIMELINE"` (Best for event or discussion collections) 
-            or `"GALLERY"` (Best for image heavy or meme collections).
+        :param display_layout: Either `"TIMELINE"` (Best for event or discussion
+            collections) or `"GALLERY"` (Best for image heavy or meme collections).
 
         Example usage:
 
@@ -181,10 +181,7 @@ class CollectionModeration(PRAWBase):
         """
         self._reddit.post(
             API_PATH["collection_dis_layout"],
-            data={
-                "collection_id": self.collection_id,
-                "display_layout": display_layout,
-            },
+            data={"collection_id": self.collection_id, "display_layout": display_layout},
         )
 
     def update_title(self, title: str):
