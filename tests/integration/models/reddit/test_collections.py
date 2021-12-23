@@ -198,7 +198,7 @@ class TestCollectionModeration(IntegrationTest):
         with self.use_cassette():
             collection = self.subreddit.collections(uuid)
             collection.mod.update_display_layout(None)
-            assert None == collection.display_layout
+            assert collection.display_layout is None
 
     @mock.patch("time.sleep", return_value=None)
     def test_update_title(self, _):
