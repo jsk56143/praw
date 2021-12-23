@@ -139,6 +139,16 @@ class TestCollectionModeration(IntegrationTest):
             assert new_description == collection.description
 
     @mock.patch("time.sleep", return_value=None)
+    def test_update_display_layout(self, _):
+        self.reddit.read_only = False
+        uuid = self.NONEMPTY_REAL_UUID
+        new_display_layout = "GALLERY"
+        with self.use_cassette():
+            collection = self.subreddit.collections(uuid)
+            collection.mod.update_display_layout(new_display_layout)
+            assert new_display_layout == collection.display_layout
+
+    @mock.patch("time.sleep", return_value=None)
     def test_update_title(self, _):
         self.reddit.read_only = False
         uuid = self.NONEMPTY_REAL_UUID
