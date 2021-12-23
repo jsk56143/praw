@@ -168,7 +168,7 @@ class CollectionModeration(PRAWBase):
     def update_display_layout(self, display_layout: str):
         """Update the collection's display layout.
 
-        :param display_layout: Either `TIMELINE` or `GALLERY`.
+        :param display_layout: Either `"TIMELINE"` or `"GALLERY"`.
 
         Example usage:
 
