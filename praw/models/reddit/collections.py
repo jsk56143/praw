@@ -165,6 +165,27 @@ class CollectionModeration(PRAWBase):
             data={"collection_id": self.collection_id, "description": description},
         )
 
+    def update_display_layout(self, display_layout: str):
+        """Update the collection's display layout.
+
+        :param display_layout: Either `TIMELINE` or `GALLERY`.
+
+        Example usage:
+
+        .. code-block:: python
+
+            collection = reddit.subreddit("SUBREDDIT").collections("some_uuid")
+            collection.mod.update_display_layout("GALLERY")
+
+        """
+        self._reddit.post(
+            API_PATH["collection_display_layout"],
+            data={
+                "collection_id": self.collection_id,
+                "display_layout": display_layout,
+            },
+        )
+
     def update_title(self, title: str):
         """Update the collection's title.
 
