@@ -176,7 +176,7 @@ class TestCollectionModeration(IntegrationTest):
         invalid_layout = "colossal atom cake"
         with self.use_cassette():
             collection = self.subreddit.collections(uuid)
-            with pytest.raises(RedditAPIException) as excinfo:
+            with pytest.raises(RedditAPIException):
                 collection.mod.update_display_layout(invalid_layout)
             assert collection.display_layout is None
 
