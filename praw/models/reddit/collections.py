@@ -174,7 +174,7 @@ class CollectionModeration(PRAWBase):
 
         .. code-block:: python
 
-            collection = reddit.subreddit("SUBREDDIT").collections("some_uuid")
+            collection = reddit.subreddit("test").collections("some_uuid")
             collection.mod.update_display_layout("GALLERY")
 
         """
