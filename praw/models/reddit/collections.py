@@ -168,13 +168,13 @@ class CollectionModeration(PRAWBase):
     def update_display_layout(self, display_layout: str):
         """Update the collection's display layout.
 
-        :param display_layout: Either `TIMELINE` or `GALLERY`.
+        :param display_layout: Either `"TIMELINE"` or `"GALLERY"`.
 
         Example usage:
 
         .. code-block:: python
 
-            collection = reddit.subreddit("SUBREDDIT").collections("some_uuid")
+            collection = reddit.subreddit("test").collections("some_uuid")
             collection.mod.update_display_layout("GALLERY")
 
         """
