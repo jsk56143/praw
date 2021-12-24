@@ -21,6 +21,13 @@ Unreleased
 - The ``after`` argument for :meth:`.conversations` will now have to be included in
   ``params`` keyword argument.
 
+7.6.0 (2021/12/23)
+------------------
+**Added**
+
+- Add method :meth:`~.Collection.update_display_layout` to :class:`.Collection` class to support
+  update_display_layout.
+
 7.5.0 (2021/11/13)
 ------------------
 
