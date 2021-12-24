@@ -147,6 +147,7 @@ class TestCollectionModeration(IntegrationTest):
             collection = self.subreddit.collections(uuid)
             collection.mod.update_display_layout(gallery_layout)
             assert gallery_layout == collection.display_layout
+    
     @mock.patch("time.sleep", return_value=None)
     def test_update_display_layout__timeline(self, _):
         self.reddit.read_only = False
