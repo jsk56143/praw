@@ -9,8 +9,8 @@ Unreleased
 **Added**
 
 - :meth:`.pin` to manage pinned submissions on the authenticated user's profile.
-- Add method :meth:`~.Collection.update_display_layout` to :class:`.Collection` class to support
-  update_display_layout.
+- :meth:`.update_display_layout` to update the display layout of posts in a
+  :class:`.Collection`.
 
 **Changed**
 
