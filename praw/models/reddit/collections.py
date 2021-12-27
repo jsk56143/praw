@@ -466,7 +466,7 @@ class SubredditCollectionsModeration(PRAWBase):
 
         .. code-block:: python
 
-            my_sub = reddit.subreddit("SUBREDDIT")
+            my_sub = reddit.subreddit("test")
             new_collection = my_sub.collections.mod.create("Title", "desc", "GALLERY")
             new_collection.mod.add_post("bgibu9")
 
