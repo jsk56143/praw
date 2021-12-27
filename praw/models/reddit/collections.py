@@ -447,7 +447,7 @@ class SubredditCollectionsModeration(PRAWBase):
         super().__init__(reddit, _data)
         self.subreddit_fullname = sub_fullname
 
-    def create(self, title: str, description: str):
+    def create(self, title: str, description: str, display_layout: str):
         """Create a new :class:`.Collection`.
 
         The authenticated account must have appropriate moderator permissions in the
@@ -455,6 +455,10 @@ class SubredditCollectionsModeration(PRAWBase):
 
         :param title: The title of the collection, up to 300 characters.
         :param description: The description, up to 500 characters.
+        :param display_layout: Either ``"TIMELINE"`` for events or discussions or
+            ``"GALLERY"`` for images or memes. Passing ``""`` or ``None`` will make the
+            collection appear on Reddit as if ``display_layout`` is set to
+            ``"TIMELINE"``.
 
         :returns: The newly created :class:`.Collection`.
 
@@ -463,7 +467,7 @@ class SubredditCollectionsModeration(PRAWBase):
         .. code-block:: python
 
             my_sub = reddit.subreddit("SUBREDDIT")
-            new_collection = my_sub.collections.mod.create("Title", "desc")
+            new_collection = my_sub.collections.mod.create("Title", "desc", "GALLERY")
             new_collection.mod.add_post("bgibu9")
 
         .. seealso::
@@ -477,6 +481,7 @@ class SubredditCollectionsModeration(PRAWBase):
                 "sr_fullname": self.subreddit_fullname,
                 "title": title,
                 "description": description,
+                "display_layout": display_layout,
             },
         )
 
